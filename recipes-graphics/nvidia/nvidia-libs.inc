@@ -63,12 +63,12 @@ do_install_append() {
 }
 
 python populate_packages_prepend() {
-    d.appendVar("RDEPENDS_nvidia", " xorg-abi-video-23")
+    d.appendVar("RDEPENDS_xf86-video-nvidia", " xorg-abi-video-23")
 }
 
 do_make_scripts[noexec] = "1"
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES_xf86-video-nvidia = "x11"
 
 FILES_${PN} += " \
     ${libdir} \
