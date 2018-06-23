@@ -96,6 +96,6 @@ RDEPENDS_xf86-video-nvidia = " \
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
-INSANE_SKIP_${PN}_append = "ldflags already-stripped"
-INSANE_SKIP_xf86-video-nvidia_append = "ldflags"
-INSANE_SKIP_libgl-nvidia_append = "ldflags"
+INSANE_SKIP_${PN}_append = " ldflags already-stripped"
+INSANE_SKIP_xf86-video-nvidia_append = " ldflags"
+INSANE_SKIP_libgl-nvidia_append = " ldflags"
