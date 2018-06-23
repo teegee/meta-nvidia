@@ -6,3 +6,5 @@ EXTRA_OEMAKE_append = " \
     "
 
 SRC_URI += "file://0001-uvm8_va_block.c-include-task_stack.h.patch"
+
+DEPENDS += "elfutils"
