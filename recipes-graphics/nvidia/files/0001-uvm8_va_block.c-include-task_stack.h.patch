@@ -1,0 +1,25 @@
+From 383b4cf11fff3b776905618f0e2cd321f5eb5018 Mon Sep 17 00:00:00 2001
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+Date: Sat, 23 Jun 2018 12:11:33 +0200
+Subject: [PATCH] uvm8_va_block.c: include task_stack.h
+
+Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+---
+ nvidia-uvm/uvm8_va_block.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/nvidia-uvm/uvm8_va_block.c b/nvidia-uvm/uvm8_va_block.c
+index 99f6f9b21117..c77905f5d939 100644
+--- a/nvidia-uvm/uvm8_va_block.c
++++ b/nvidia-uvm/uvm8_va_block.c
+@@ -21,6 +21,7 @@
+ 
+ *******************************************************************************/
+ 
++#include <linux/sched/task_stack.h>
+ #include "uvm_linux.h"
+ #include "uvm_common.h"
+ #include "uvm8_gpu.h"
+-- 
+2.7.4
+
