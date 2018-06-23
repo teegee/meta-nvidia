@@ -82,7 +82,7 @@ FILES_${PN}-doc += " \
 
 FILES_xf86-video-nvidia += " \
     ${libdir}/xorg/modules/extensions/libglx.so \
-    ${libdir}/xorg/modules/extensions/drivers/nvidia_drv.so \
+    ${libdir}/xorg/modules/drivers/nvidia_drv.so \
     "
 
 RDEPENDS_${PN} += " \
