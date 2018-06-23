@@ -62,27 +62,36 @@ do_install_append() {
     install -m 444 -D ${NVIDIA_SRC}/nvidia-persistenced.1.gz ${D}${mandir}/man1/nvidia-persistenced.1.gz
 }
 
+PACKAGES =+ "xf86-video-nvidia"
+
 python populate_packages_prepend() {
     d.appendVar("RDEPENDS_xf86-video-nvidia", " xorg-abi-video-23")
 }
 
 do_make_scripts[noexec] = "1"
 
-REQUIRED_DISTRO_FEATURES_xf86-video-nvidia = "x11"
-
 FILES_${PN} += " \
     ${libdir} \
     ${bindir} \
-"
+    "
 
 FILES_${PN}-doc += " \
     ${mandir} \
     ${datadir}/doc/nvidia \
-"
+    "
+
+FILES_xf86-video-nvidia += " \
+    ${libdir}/xorg/modules/extensions/libglx.so \
+    ${libdir}/xorg/modules/extensions/drivers/nvidia_drv.so \
+    "
 
 RDEPENDS_${PN} += " \
-    xserver-xorg-module-libwfb \
     libvdpau \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xf86-video-nvidia', '', d)} \
+    "
+
+RDEPENDS_xf86-video-nvidia = " \
+    xserver-xorg-module-libwfb \
 "
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
