@@ -2,22 +2,21 @@
 # Read this first: https://devtalk.nvidia.com/default/topic/915640/unix-graphics-announcements-and-news/multiple-glx-client-libraries-in-the-nvidia-linux-driver-installer-package/
 
 do_install_append() {
-	mkdir -p ${D}${libdir}/xorg/modules/drivers \
-	         ${D}${libdir}/xorg/modules/extensions
+    mkdir -p ${D}${libdir}/xorg/modules/drivers ${D}${libdir}/xorg/modules/extensions
 
-	cp ${NVIDIA_SRC}/libEGL_nvidia.so.${PV} ${D}${libdir}/
-	ln -sf libEGL_nvidia.so.${PV} ${D}${libdir}/libEGL_nvidia.so.0
-	cp ${NVIDIA_SRC}/libGLESv1_CM_nvidia.so.${PV} ${D}${libdir}/
-	ln -sf libGLESv1_CM_nvidia.so.${PV} ${D}${libdir}/libGLESv1_CM_nvidia.so.1
-	cp ${NVIDIA_SRC}/libGLESv2_nvidia.so.${PV} ${D}${libdir}/
-	ln -sf libGLESv2_nvidia.so.${PV} ${D}${libdir}/libGLESv2_nvidia.so.2
-	cp ${NVIDIA_SRC}/libGLX_nvidia.so.${PV} ${D}${libdir}/
-	ln -sf libGLX_nvidia.so.${PV} ${D}${libdir}/libGLX_nvidia.so.0
-	ln -sf libGLX_nvidia.so.${PV} ${D}${libdir}/libGLX_indirect.so.0
+    cp ${NVIDIA_SRC}/libEGL_nvidia.so.${PV} ${D}${libdir}/
+    ln -sf libEGL_nvidia.so.${PV} ${D}${libdir}/libEGL_nvidia.so.0
+    cp ${NVIDIA_SRC}/libGLESv1_CM_nvidia.so.${PV} ${D}${libdir}/
+    ln -sf libGLESv1_CM_nvidia.so.${PV} ${D}${libdir}/libGLESv1_CM_nvidia.so.1
+    cp ${NVIDIA_SRC}/libGLESv2_nvidia.so.${PV} ${D}${libdir}/
+    ln -sf libGLESv2_nvidia.so.${PV} ${D}${libdir}/libGLESv2_nvidia.so.2
+    cp ${NVIDIA_SRC}/libGLX_nvidia.so.${PV} ${D}${libdir}/
+    ln -sf libGLX_nvidia.so.${PV} ${D}${libdir}/libGLX_nvidia.so.0
+    ln -sf libGLX_nvidia.so.${PV} ${D}${libdir}/libGLX_indirect.so.0
 
-	cp ${NVIDIA_SRC}/tls/libnvidia-tls.so.${PV} ${D}${libdir}/
-	cp ${NVIDIA_SRC}/libnvidia-glcore.so.${PV} ${D}${libdir}/
-	cp ${NVIDIA_SRC}/libnvidia-eglcore.so.${PV} ${D}${libdir}/
+    cp ${NVIDIA_SRC}/tls/libnvidia-tls.so.${PV} ${D}${libdir}/
+    cp ${NVIDIA_SRC}/libnvidia-glcore.so.${PV} ${D}${libdir}/
+    cp ${NVIDIA_SRC}/libnvidia-eglcore.so.${PV} ${D}${libdir}/
     cp ${NVIDIA_SRC}/libnvidia-ml.so.${PV} ${D}${libdir}/
     cp ${NVIDIA_SRC}/libnvidia-fbc.so.${PV} ${D}${libdir}/
     cp ${NVIDIA_SRC}/libnvidia-ifr.so.${PV} ${D}${libdir}/
@@ -37,11 +36,11 @@ do_install_append() {
     ln -sf libvdpau_nvidia.so.${PV} ${D}${libdir}/libvdpau_nvidia.so
 
     # xf86-video-nvidia
-	cp -r ${NVIDIA_SRC}/nvidia_drv.so ${D}${libdir}/xorg/modules/drivers/
-	cp -r ${NVIDIA_SRC}/libglx.so.${PV} ${D}${libdir}/xorg/modules/extensions/libglx.so
+    cp -r ${NVIDIA_SRC}/nvidia_drv.so ${D}${libdir}/xorg/modules/drivers/
+    cp -r ${NVIDIA_SRC}/libglx.so.${PV} ${D}${libdir}/xorg/modules/extensions/libglx.so
 
     # nvidia
-	mkdir -p ${D}${bindir}
+    mkdir -p ${D}${bindir}
     install -m 755 -D ${NVIDIA_SRC}/nvidia-settings ${D}${bindir}/nvidia-settings
     install -m 755 -D ${NVIDIA_SRC}/nvidia-debugdump ${D}${bindir}/nvidia-debugdump
     install -m 755 -D ${NVIDIA_SRC}/nvidia-smi ${D}${bindir}/nvidia-smi
@@ -52,7 +51,7 @@ do_install_append() {
     install -m 755 -D ${NVIDIA_SRC}/nvidia-persistenced ${D}${bindir}/nvidia-persistenced
 
     # nvidia-doc
-	mkdir -p ${D}${datadir}/doc/nvidia ${D}${mandir}/man1
+    mkdir -p ${D}${datadir}/doc/nvidia ${D}${mandir}/man1
     cp -r ${NVIDIA_SRC}/html ${D}${datadir}/doc/nvidia/
     cp ${NVIDIA_SRC}/NVIDIA_Changelog ${D}${datadir}/doc/nvidia/
     cp ${NVIDIA_SRC}/README.txt ${D}${datadir}/doc/nvidia/
@@ -63,30 +62,40 @@ do_install_append() {
     install -m 444 -D ${NVIDIA_SRC}/nvidia-persistenced.1.gz ${D}${mandir}/man1/nvidia-persistenced.1.gz
 }
 
+PACKAGES =+ "xf86-video-nvidia"
+
 python populate_packages_prepend() {
-    d.appendVar("RDEPENDS_nvidia", " xorg-abi-video-23")
+    d.appendVar("RDEPENDS_xf86-video-nvidia", " xorg-abi-video-23")
 }
 
 do_make_scripts[noexec] = "1"
 
-REQUIRED_DISTRO_FEATURES = "x11"
-
 FILES_${PN} += " \
-	${libdir} \
-	${bindir} \
-"
+    ${libdir} \
+    ${bindir} \
+    "
 
 FILES_${PN}-doc += " \
-	${mandir} \
-	${datadir}/doc/nvidia \
-"
+    ${mandir} \
+    ${datadir}/doc/nvidia \
+    "
+
+FILES_xf86-video-nvidia += " \
+    ${libdir}/xorg/modules/extensions/libglx.so \
+    ${libdir}/xorg/modules/drivers/nvidia_drv.so \
+    "
 
 RDEPENDS_${PN} += " \
-	xserver-xorg-module-libwfb \
     libvdpau \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xf86-video-nvidia', '', d)} \
+    "
+
+RDEPENDS_xf86-video-nvidia = " \
+    xserver-xorg-module-libwfb \
 "
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
-INSANE_SKIP_${PN}_append = "ldflags already-stripped"
-INSANE_SKIP_libgl-nvidia_append = "ldflags"
+INSANE_SKIP_${PN}_append = " ldflags already-stripped"
+INSANE_SKIP_xf86-video-nvidia_append = " ldflags"
+INSANE_SKIP_libgl-nvidia_append = " ldflags"
