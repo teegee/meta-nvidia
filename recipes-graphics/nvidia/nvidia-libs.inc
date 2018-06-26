@@ -1,5 +1,10 @@
 # Read this first: https://devtalk.nvidia.com/default/topic/915640/unix-graphics-announcements-and-news/multiple-glx-client-libraries-in-the-nvidia-linux-driver-installer-package/
 
+# xorg-abi RPROVIDES are created at runtime
+python populate_packages_prepend() {
+    d.appendVar("RDEPENDS_xserver-xorg-video-nvidia", " xorg-abi-video-23")
+}
+
 RDEPENDS_libegl-nvidia = "libnvidia-eglcore"
 RDEPENDS_libgles1-nvidia = "libgles1 libnvidia-eglcore"
 RDEPENDS_libgles2-nvidia = "libgles2 libnvidia-eglcore"
