@@ -1,5 +1,49 @@
 # Read this first: https://devtalk.nvidia.com/default/topic/915640/unix-graphics-announcements-and-news/multiple-glx-client-libraries-in-the-nvidia-linux-driver-installer-package/
 
+RDEPENDS_libegl-nvidia = "libnvidia-eglcore"
+RDEPENDS_libgles1-nvidia = "libgles1 libnvidia-eglcore"
+RDEPENDS_libgles2-nvidia = "libgles2 libnvidia-eglcore"
+RDEPENDS_xserver-xorg-video-nvidia = " \
+    xserver-xorg-module-libwfb \
+    "
+RDEPENDS_libglx-nvidia = "libnvidia-glcore libx11 libxext libglvnd"
+RDEPENDS_libnvidia-glcore = ""
+RDEPENDS_libnvidia-eglcore = ""
+RDEPENDS_libnvidia-ml = ""
+RDEPENDS_libnvidia-fbc = "libgl libx11 libxext"
+RDEPENDS_libnvidia-ifr = "libgl libx11"
+RDEPENDS_libnvidia-encode = "libcuda libnvcuvid"
+RDEPENDS_libnvidia-opencl = ""
+RDEPENDS_libnvidia-compiler = ""
+RDEPENDS_libnvidia-ptxjitcompiler = ""
+RDEPENDS_libnvidia-cfg = ""
+RDEPENDS_libnvidia-fatbinaryloader = ""
+RDEPENDS_libnvcuvid = ""
+RDEPENDS_libcuda = "libnvidia-fatbinaryloader nvidia-persistenced"
+RDEPENDS_nvidia-vdpau-driver = "libvdpau libx11 libxext"
+RDEPENDS_nvidia-settings = " \
+    cairo \
+    gdk-pixbuf \
+    glib-2.0 \
+    gtk+ \
+    gtk+3 \
+    jansson \
+    pango \
+    cairo \
+    libx11 \
+    libxxf86vm \
+    "
+
+RDEPENDS_nvidia-debugdump = ""
+RDEPENDS_nvidia-smi = ""
+RDEPENDS_nvidia-modprobe = ""
+RDEPENDS_nvidia-xconfig = ""
+RDEPENDS_nvidia-cuda-mps = ""
+RDEPENDS_nvidia-persistenced = "libnvidia-cfg"
+
+RRECOMMENDS_libcuda = "nvidia-smi nvidia-persistenced nvidia-cuda-mps"
+RRECOMMENDS_nvidia-settings = "libnvidia-ml nvidia-vdpau-driver libglx-nvidia"
+
 do_install_append() {
     ### libraries ###
     install -d ${D}${libdir}
@@ -74,7 +118,7 @@ do_install_append() {
     install -m 0644 ${NVIDIA_SRC}/libvdpau_nvidia.so.${PV} ${D}${libdir}/
     ln -sf libvdpau_nvidia.so.${PV} ${D}${libdir}/libvdpau_nvidia.so.1
 
-    # xf86-video-nvidia
+    # xserver-xorg-video-nvidia
     install -d ${D}${libdir}/xorg/modules/drivers
     install -d ${D}${libdir}/xorg/modules/extensions
     install -m 0644 ${NVIDIA_SRC}/nvidia_drv.so ${D}${libdir}/xorg/modules/drivers/
@@ -127,7 +171,7 @@ do_install_append() {
 }
 
 PACKAGES =+ " \
-    xf86-video-nvidia \
+    xserver-xorg-video-nvidia \
     libegl-nvidia \
     libglx-nvidia \
     libgles1-nvidia \
@@ -155,10 +199,6 @@ PACKAGES =+ " \
     nvidia-persistenced \
     "
 
-python populate_packages_prepend() {
-    d.appendVar("RDEPENDS_xf86-video-nvidia", " xorg-abi-video-23")
-}
-
 do_make_scripts[noexec] = "1"
 
 FILES_${PN} += " \
@@ -171,10 +211,11 @@ FILES_${PN}-doc += " \
     ${datadir}/doc/nvidia \
     "
 
-FILES_xf86-video-nvidia += " \
+FILES_xserver-xorg-video-nvidia += " \
     ${libdir}/xorg/modules/extensions/libglx.so \
     ${libdir}/xorg/modules/drivers/nvidia_drv.so \
     ${libdir}/xorg/modules/libnvidia-wfb.so.${PV} \
+    ${sysconfdir}/nvidia-drm-outputclass.conf \
     "
 
 FILES_libegl-nvidia = " \
@@ -279,21 +320,12 @@ FILES_nvidia-cuda-mps= "${bindir}/nvidia-cuda-mps-control ${bindir}/nvidia-cuda-
 FILES_nvidia-persistenced = "${bindir}/nvidia-persistenced"
 
 
-RDEPENDS_${PN} += " \
-    libvdpau \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xf86-video-nvidia', '', d)} \
-    "
-
-RDEPENDS_xf86-video-nvidia = " \
-    xserver-xorg-module-libwfb \
-    "
-
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
 # INSANE_SKIP_libgl-nvidia_append = " ldflags"
 
 INSANE_SKIP_${PN}_append = " ldflags already-stripped"
-INSANE_SKIP_xf86-video-nvidia = "ldflags already-stripped"
+INSANE_SKIP_xserver-xorg-video-nvidia = "ldflags already-stripped"
 INSANE_SKIP_libegl-nvidia = "ldflags already-stripped"
 INSANE_SKIP_libglx-nvidia = "ldflags already-stripped"
 INSANE_SKIP_libgles1-nvidia = "ldflags already-stripped"
