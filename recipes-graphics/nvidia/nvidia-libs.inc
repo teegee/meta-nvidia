@@ -5,88 +5,89 @@ do_install_append() {
     install -d ${D}${libdir}
 
     # libegl-nvidia
-    cp ${NVIDIA_SRC}/libEGL_nvidia.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libEGL_nvidia.so.${PV} ${D}${libdir}/
     ln -sf libEGL_nvidia.so.${PV} ${D}${libdir}/libEGL_nvidia.so.0
 
     # libgles1-nvidia
-    cp ${NVIDIA_SRC}/libGLESv1_CM_nvidia.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libGLESv1_CM_nvidia.so.${PV} ${D}${libdir}/
     ln -sf libGLESv1_CM_nvidia.so.${PV} ${D}${libdir}/libGLESv1_CM_nvidia.so.1
 
     # libgles2-nvidia
-    cp ${NVIDIA_SRC}/libGLESv2_nvidia.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libGLESv2_nvidia.so.${PV} ${D}${libdir}/
     ln -sf libGLESv2_nvidia.so.${PV} ${D}${libdir}/libGLESv2_nvidia.so.2
 
     # libglx-nvidia
-    cp ${NVIDIA_SRC}/libGLX_nvidia.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libGLX_nvidia.so.${PV} ${D}${libdir}/
     ln -sf libGLX_nvidia.so.${PV} ${D}${libdir}/libGLX_nvidia.so.0
     ln -sf libGLX_nvidia.so.${PV} ${D}${libdir}/libGLX_indirect.so.0
 
     # libnvidia-glcore
-    cp ${NVIDIA_SRC}/tls/libnvidia-tls.so.${PV} ${D}${libdir}/
-    cp ${NVIDIA_SRC}/libnvidia-glcore.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/tls/libnvidia-tls.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-glcore.so.${PV} ${D}${libdir}/
 
     # libnvidia-eglcore
-    cp ${NVIDIA_SRC}/libnvidia-eglcore.so.${PV} ${D}${libdir}/
-    cp ${NVIDIA_SRC}/libnvidia-glsi.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-eglcore.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-glsi.so.${PV} ${D}${libdir}/
 
     # libnvidia-ml
-    cp ${NVIDIA_SRC}/libnvidia-ml.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-ml.so.${PV} ${D}${libdir}/
     ln -sf libnvidia-ml.so.${PV} ${D}${libdir}/libnvidia-ml.so.1
 
     # libnvidia-fbc
-    cp ${NVIDIA_SRC}/libnvidia-fbc.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-fbc.so.${PV} ${D}${libdir}/
     ln -sf libnvidia-fbc.so.${PV} ${D}${libdir}/libnvidia-fbc.so.1
 
     # libnvidia-ifr
-    cp ${NVIDIA_SRC}/libnvidia-ifr.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-ifr.so.${PV} ${D}${libdir}/
     ln -sf libnvidia-ifr.so.${PV} ${D}${libdir}/libnvidia-ifr.so.1
 
     # libnvidia-encode
-    cp ${NVIDIA_SRC}/libnvidia-encode.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-encode.so.${PV} ${D}${libdir}/
     ln -sf libnvidia-encode.so.${PV} ${D}${libdir}/libnvidia-encode.so.1
 
     # libnvidia-opencl
-    cp ${NVIDIA_SRC}/libnvidia-opencl.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-opencl.so.${PV} ${D}${libdir}/
     ln -sf libnvidia-opencl.so.${PV} ${D}${libdir}/libnvidia-opencl.so.1
 
     # libnvidia-compiler
-    cp ${NVIDIA_SRC}/libnvidia-compiler.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-compiler.so.${PV} ${D}${libdir}/
 
     # libnvidia-ptxjitcompiler
-    cp ${NVIDIA_SRC}/libnvidia-ptxjitcompiler.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-ptxjitcompiler.so.${PV} ${D}${libdir}/
 
     # libnvidia-cfg
-    cp ${NVIDIA_SRC}/libnvidia-cfg.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-cfg.so.${PV} ${D}${libdir}/
     ln -sf libnvidia-cfg.so.${PV} ${D}${libdir}/libnvidia-cfg.so.1
 
     # libnvidia-fatbinaryloader
-    cp ${NVIDIA_SRC}/libnvidia-fatbinaryloader.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-fatbinaryloader.so.${PV} ${D}${libdir}/
 
     # libcuda
-    cp ${NVIDIA_SRC}/libcuda.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libcuda.so.${PV} ${D}${libdir}/
     ln -sf libcuda.so.${PV} ${D}${libdir}/libcuda.so.1
 
     # libnvcuvid
-    cp ${NVIDIA_SRC}/libnvcuvid.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvcuvid.so.${PV} ${D}${libdir}/
     ln -sf libnvcuvid.so.${PV} ${D}${libdir}/libnvcuvid.so.1
 
     # nvidia-vdpau-driver
-    cp ${NVIDIA_SRC}/libvdpau_nvidia.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libvdpau_nvidia.so.${PV} ${D}${libdir}/
     ln -sf libvdpau_nvidia.so.${PV} ${D}${libdir}/libvdpau_nvidia.so.1
 
     # xf86-video-nvidia
-    mkdir -p ${D}${libdir}/xorg/modules/drivers ${D}${libdir}/xorg/modules/extensions
-    cp -r ${NVIDIA_SRC}/nvidia_drv.so ${D}${libdir}/xorg/modules/drivers/
-    cp -r ${NVIDIA_SRC}/libglx.so.${PV} ${D}${libdir}/xorg/modules/extensions/libglx.so
-    cp ${NVIDIA_SRC}/libnvidia-wfb.so.${PV} ${D}${libdir}/xorg/modules
+    install -d ${D}${libdir}/xorg/modules/drivers
+    install -d ${D}${libdir}/xorg/modules/extensions
+    install -m 0644 ${NVIDIA_SRC}/nvidia_drv.so ${D}${libdir}/xorg/modules/drivers/
+    install -m 0644 ${NVIDIA_SRC}/libglx.so.${PV} ${D}${libdir}/xorg/modules/extensions/libglx.so
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-wfb.so.${PV} ${D}${libdir}/xorg/modules
 
     ### executables ###
-    mkdir -p ${D}${bindir}
+    install -d ${D}${bindir}
 
     # nvidia-settings
     install -m 755 -D ${NVIDIA_SRC}/nvidia-settings ${D}${bindir}/nvidia-settings
-    cp ${NVIDIA_SRC}/libnvidia-gtk2.so.${PV} ${D}${libdir}/
-    cp ${NVIDIA_SRC}/libnvidia-gtk3.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-gtk2.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-gtk3.so.${PV} ${D}${libdir}/
 
     # nvidia-debugdump
     install -m 755 -D ${NVIDIA_SRC}/nvidia-debugdump ${D}${bindir}/nvidia-debugdump
@@ -108,10 +109,16 @@ do_install_append() {
     install -m 755 -D ${NVIDIA_SRC}/nvidia-persistenced ${D}${bindir}/nvidia-persistenced
 
     ### nvidia-doc ### - it should also be split into individual -dev pkgs
-    mkdir -p ${D}${datadir}/doc/nvidia ${D}${mandir}/man1
-    cp -r ${NVIDIA_SRC}/html ${D}${datadir}/doc/nvidia/
-    cp ${NVIDIA_SRC}/NVIDIA_Changelog ${D}${datadir}/doc/nvidia/
-    cp ${NVIDIA_SRC}/README.txt ${D}${datadir}/doc/nvidia/
+    install -d ${D}${mandir}/man1
+
+    install -d ${D}${datadir}/doc/nvidia/html
+    for html_file in ${NVIDIA_SRC}/html/*.html
+    do
+        install -m 0644 $html_file ${D}${datadir}/doc/nvidia
+    done
+
+    install -m 0644 ${NVIDIA_SRC}/NVIDIA_Changelog ${D}${datadir}/doc/nvidia/
+    install -m 0644 ${NVIDIA_SRC}/README.txt ${D}${datadir}/doc/nvidia/
     install -m 444 -D ${NVIDIA_SRC}/nvidia-settings.1.gz ${D}${mandir}/man1/nvidia-settings.1.gz
     install -m 444 -D ${NVIDIA_SRC}/nvidia-smi.1.gz ${D}${mandir}/man1/nvidia-smi.1.gz
     install -m 444 -D ${NVIDIA_SRC}/nvidia-xconfig.1.gz ${D}${mandir}/man1/nvidia-xconfig.1.gz
