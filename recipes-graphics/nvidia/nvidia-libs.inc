@@ -71,7 +71,7 @@ do_install_append() {
     ln -sf libGLX_nvidia.so.${PV} ${D}${libdir}/libGLX_indirect.so.0
 
     # libnvidia-glcore
-    install -m 0644 ${NVIDIA_SRC}/tls/libnvidia-tls.so.${PV} ${D}${libdir}/
+    install -m 0644 ${NVIDIA_SRC}/libnvidia-tls.so.${PV} ${D}${libdir}/
     install -m 0644 ${NVIDIA_SRC}/libnvidia-glcore.so.${PV} ${D}${libdir}/
 
     # libnvidia-eglcore
@@ -127,8 +127,8 @@ do_install_append() {
     install -d ${D}${libdir}/xorg/modules/drivers
     install -d ${D}${libdir}/xorg/modules/extensions
     install -m 0644 ${NVIDIA_SRC}/nvidia_drv.so ${D}${libdir}/xorg/modules/drivers/
-    install -m 0644 ${NVIDIA_SRC}/libglx.so.${PV} ${D}${libdir}/xorg/modules/extensions/libglx.so
-    install -m 0644 ${NVIDIA_SRC}/libnvidia-wfb.so.${PV} ${D}${libdir}/xorg/modules
+    install -m 0644 ${NVIDIA_SRC}/libglxserver_nvidia.so.${PV} ${D}${libdir}/xorg/modules/extensions/libglxserver_nvidia.so
+#    install -m 0644 ${NVIDIA_SRC}/libnvidia-wfb.so.${PV} ${D}${libdir}/xorg/modules
 
     ### executables ###
     install -d ${D}${bindir}
