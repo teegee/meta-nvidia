@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://README.md;md5=ecb4629295de7c908bb3717e01494be7"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "python libx11 libxext glproto"
+DEPENDS = "python libx11 libxext xorgproto"
 
 inherit autotools pkgconfig
 

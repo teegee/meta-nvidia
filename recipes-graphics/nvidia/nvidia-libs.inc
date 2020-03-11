@@ -2,7 +2,7 @@
 
 # xorg-abi RPROVIDES are created at runtime
 python populate_packages_prepend() {
-    d.appendVar("RDEPENDS_xserver-xorg-video-nvidia", " xorg-abi-video-23")
+    d.appendVar("RDEPENDS_xserver-xorg-video-nvidia", " xorg-abi-video-24")
 }
 
 RDEPENDS_libegl-nvidia = "libnvidia-eglcore"
