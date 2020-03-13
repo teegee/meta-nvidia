@@ -2,3 +2,6 @@
 # we want to avoid because we're using libglvnd
 
 PACKAGECONFIG_remove = "glx dri glamor xwayland"
+
+PACKAGECONFIG_append = "xinerama"
+
