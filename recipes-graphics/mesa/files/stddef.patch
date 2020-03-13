@@ -1,0 +1,27 @@
+From b293e7e843cff28c4b925fb0db988395c040d0ef Mon Sep 17 00:00:00 2001
+From: Matt Turner <mattst88@gmail.com>
+Date: Tue, 23 Jul 2019 10:42:41 -0700
+Subject: [PATCH 2/2] libutil: Include stddef.h for NULL
+
+Fixes: #5
+
+Reviewed-by: Eric Engestrom <eric@engestrom.ch>
+---
+ src/libutil/error.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/libutil/error.c b/src/libutil/error.c
+index 7212748..d3b2666 100644
+--- a/src/libutil/error.c
++++ b/src/libutil/error.c
+@@ -30,6 +30,7 @@
+ 
+ #include "gluos.h"
+ #include "gluint.h"
++#include <stddef.h>
+ #include <GL/glu.h>
+ 
+ 
+-- 
+2.24.1
+
